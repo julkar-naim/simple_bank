@@ -4,25 +4,26 @@ import (
 	"database/sql"
 	"github.com/julkar-naim/simple-bank/api"
 	db "github.com/julkar-naim/simple-bank/db/sqlc"
+	"github.com/julkar-naim/simple-bank/util"
 	_ "github.com/lib/pq"
 	"log"
 )
 
-const (
-	dbDriver = "postgres"
-	dbUri    = "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable"
-	address  = "0.0.0.0:8080"
-)
-
 func main() {
-	conn, err := sql.Open(dbDriver, dbUri)
+	config, err := util.LoadConfig()
+	if err != nil {
+		log.Fatal("cant read all the config", err)
+	}
+	util.NewConfig(config)
+
+	conn, err := sql.Open(config.DBDriver, config.DBSource)
 	if err != nil {
 		log.Fatal("cannot connect to database", err)
 	}
 	store := db.NewStore(conn)
 	server := api.NewServer(store)
 
-	err = server.Start(address)
+	err = server.Start(config.Address)
 	if err != nil {
 		log.Fatal("cannot start server", err)
 	}
