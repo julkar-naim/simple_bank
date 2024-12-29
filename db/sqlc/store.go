@@ -6,21 +6,26 @@ import (
 	"fmt"
 )
 
-// Store provides all necessary function for db query and transactions
-type Store struct {
+type Store interface {
+	Querier
+	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
+}
+
+// SqlStore provides all necessary function for db query and transactions
+type SqlStore struct {
 	*Queries
 	db *sql.DB
 }
 
-// NewStore creates a new Store
-func NewStore(db *sql.DB) *Store {
-	return &Store{
+// NewSqlStore creates a new SqlStore
+func NewSqlStore(db *sql.DB) *SqlStore {
+	return &SqlStore{
 		db:      db,
 		Queries: New(db),
 	}
 }
 
-func (store *Store) execTx(ctx context.Context, callback func(queries *Queries) error) error {
+func (store *SqlStore) execTx(ctx context.Context, callback func(queries *Queries) error) error {
 	tx, err := store.db.BeginTx(ctx, nil)
 	if err != nil {
 		return err
@@ -53,7 +58,7 @@ type TransferTxResult struct {
 
 // TransferTx handles money transaction
 // atomic steps are: create transfer, create entry, update balance
-func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
+func (store *SqlStore) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
 	var result TransferTxResult
 	var err error
 
