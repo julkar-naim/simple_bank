@@ -22,4 +22,5 @@ func TestAccount(t *testing.T) {
 	require.NotEmpty(t, owner)
 	require.NotZero(t, money)
 	require.NotEmpty(t, currency)
+	// test
 }

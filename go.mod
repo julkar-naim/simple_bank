@@ -1,6 +1,8 @@
 module github.com/julkar-naim/simple-bank
 
-go 1.22.9
+go 1.23
+
+toolchain go1.23.3
 
 require (
 	github.com/gin-gonic/gin v1.10.0
@@ -11,6 +13,7 @@ require (
 )
 
 require (
+	github.com/buildpacks/pack v0.36.2 // indirect
 	github.com/bytedance/sonic v1.12.6 // indirect
 	github.com/bytedance/sonic/loader v0.2.1 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect

@@ -1,3 +1,5 @@
+github.com/buildpacks/pack v0.36.2 h1:job8nLp7rUuhM66iGDjf3StOGw1A8HbrM9CBNE6UGqY=
+github.com/buildpacks/pack v0.36.2/go.mod h1:325S/GMbOKvMkHLtbauW6oTqPhb1c0aSX49zxCBIXbg=
 github.com/bytedance/sonic v1.12.6 h1:/isNmCUF2x3Sh8RAp/4mh4ZGkcFAX/hLrzrK3AvpRzk=
 github.com/bytedance/sonic v1.12.6/go.mod h1:B8Gt/XvtZ3Fqj+iSKMypzymZxw/FVwgIGKzMzT9r/rk=
 github.com/bytedance/sonic/loader v0.1.1/go.mod h1:ncP89zfokxS5LZrJxl5z0UJcsk4M4yY2JpfqGeCtNLU=
