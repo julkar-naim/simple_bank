@@ -55,7 +55,10 @@ jobs:
         uses: vladopajic/go-test-coverage@v2
         continue-on-error: true # Should fail after coverage comment is posted
         with:
-          config: ./.github/.testcoverage.yml
+          profile: cover.out
+          threshold-file: 70
+          threshold-package: 70
+          threshold-total: 70
 
         # Post coverage report as comment (in 3 steps)
       - name: find pull request ID
