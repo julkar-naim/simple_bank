@@ -59,9 +59,9 @@ jobs:
         continue-on-error: true # Should fail after coverage comment is posted
         with:
           profile: coverage.out
-          threshold-file: 0
-          threshold-package: 0
-          threshold-total: 0
+          threshold-file: 50
+          threshold-package: 50
+          threshold-total: 50
 
         # Post coverage report as comment (in 3 steps)
       - name: find pull request ID
