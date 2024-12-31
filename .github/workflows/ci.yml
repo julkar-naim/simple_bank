@@ -6,6 +6,9 @@ name: ci-test
 on:
   push:
 
+permissions:
+  pull-requests: write
+
 jobs:
 
   build:
