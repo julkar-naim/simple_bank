@@ -15,6 +15,7 @@ services:
   api:
     build:
       context: .
+      target: development
       dockerfile: Dockerfile
     container_name: simple_api
     ports:
@@ -23,12 +24,14 @@ services:
       - DB_DRIVER=postgres
       - DB_SOURCE=postgresql://root:secret@postgres:5432/simple_bank?sslmode=disable
       - ADDRESS=0.0.0.0:8080
+    volumes:
+      - .:/app
     depends_on:
       - postgres
     networks:
       - simple-bank-networks
     entrypoint: [ "/app/wait-for.sh", "postgres:5432", "--", "/app/start.sh" ]
-    command: [ "/app/main" ]
+    command: [ "/bin/air" ]
 
 networks:
   simple-bank-networks:
