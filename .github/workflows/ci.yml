@@ -93,8 +93,10 @@ jobs:
           edit-mode: replace
           body: |
             go-test-coverage report:
-            ```
-            ${{ fromJSON(steps.coverage.outputs.report) }} ```
+            
+            | Summary | Coverage | Status |
+            |----------|----------|----------|
+            | Total coverage | ${{ steps.coverage.outputs.total-coverage }}% | ${{ steps.coverage.outcome == 'failure' && ':x:' || ':white_check_mark:'  }} |
 
       - name: "finally check coverage"
         if: steps.coverage.outcome == 'failure'

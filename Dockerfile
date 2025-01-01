@@ -21,6 +21,7 @@ RUN go build -o main main.go
 # production stage
 FROM alpine:3.21
 WORKDIR /app
+COPY --from=base /bin/migrate /bin/migrate
 COPY --from=builder /app/main .
 COPY app.env .
 COPY start.sh .
