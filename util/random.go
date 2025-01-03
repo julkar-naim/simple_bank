@@ -4,7 +4,7 @@ import (
 	"math/rand"
 )
 
-// RandomInt64 returns a random int64 in range [0,n)
+// RandomInt returns a random int64 in range [0,n)
 func RandomInt(n int64) int64 {
 	return rand.Int63n(n)
 }
