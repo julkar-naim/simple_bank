@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-bank-api-deployment
+  labels:
+    app: simple-bank-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simple-bank-api
+  template:
+    metadata:
+      labels:
+        app: simple-bank-api
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret
+      containers:
+        - name: simple-bank-api
+          image: 970547364808.dkr.ecr.ap-southeast-2.amazonaws.com/simplebank:ed9ac6a6333e859af79b2cf4e1c9c85d366b0b2f
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_DRIVER
+              valueFrom:
+                configMapKeyRef:
+                  name: simple-bank-api-config
+                  key: DB_DRIVER
+            - name: DB_SOURCE
+              valueFrom:
+                configMapKeyRef:
+                  name: simple-bank-api-config
+                  key: DB_SOURCE
+            - name: ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: simple-bank-api-config
+                  key: ADDRESS

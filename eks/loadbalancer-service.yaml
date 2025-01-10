@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-bank-api-load-balancer-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: simple-bank-api
+  ports:
+    - port: 80
+      targetPort: 8080
